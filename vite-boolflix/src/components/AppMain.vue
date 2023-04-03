@@ -1,10 +1,9 @@
 <script>
-
 import {store} from '../store';
 import axios from 'axios'
 import AppCard from './AppCard.vue';
 export default{
-  name: 'AppMain1',
+  name: 'AppMain',
   components:{
     AppCard,
   },
@@ -25,7 +24,17 @@ export default{
         }
       }).then((response)=>{
         console.log(response);
-        this.store.movies = response.data.results
+        this.store.movies = response.data.results;
+      })
+      axios.get(this.store.config.urlTvShows,{
+        params:{
+          api_key: this.store.config.apiKey,
+          language: this.store.config.lang,
+          query: this.store.searchKey
+        }
+      }).then((response)=>{
+        console.log(response);
+        this.store.tv = response.data.results;
       })
     }
   }
@@ -36,10 +45,19 @@ export default{
     <input type="text" placeholder="Cerca Film" v-model="store.searchKey">
     <button @click="search">Search</button>
   </div>
+  <h2>Movie</h2>
   <div>
     <ul>
         <li v-for="movie in store.movies">
             <AppCard :info="movie"></AppCard>
+        </li>
+    </ul>
+  </div>
+  <h2>Tv Show</h2>
+  <div>
+    <ul>
+        <li v-for="tvShow in store.tv">
+            <AppCard :info="tvShow"></AppCard>
         </li>
     </ul>
   </div>
