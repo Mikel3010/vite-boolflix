@@ -1,0 +1,48 @@
+<script>
+
+import {store} from '../store';
+import axios from 'axios'
+import AppCard from './AppCard.vue';
+export default{
+  name: 'AppMain1',
+  components:{
+    AppCard,
+  },
+  data(){
+    return{
+      store
+    }
+  },
+  methods:{
+    search(){
+      console.log('fai ricerca');
+      console.log(this.searchKey);
+      axios.get(this.store.config.urlMovie,{
+        params:{
+          api_key: this.store.config.apiKey,
+          language: this.store.config.lang,
+          query: this.store.searchKey
+        }
+      }).then((response)=>{
+        console.log(response);
+        this.store.movies = response.data.results
+      })
+    }
+  }
+}
+</script>
+<template>
+  <div>
+    <input type="text" placeholder="Cerca Film" v-model="store.searchKey">
+    <button @click="search">Search</button>
+  </div>
+  <div>
+    <ul>
+        <li v-for="movie in store.movies">
+            <AppCard :info="movie"></AppCard>
+        </li>
+    </ul>
+  </div>
+</template>
+<style lang="scss" scoped>
+</style>
