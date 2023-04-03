@@ -41,7 +41,7 @@ export default{
 }
 </script>
 <template>
-  <div>
+  <div class="container">
     <input type="text" placeholder="Cerca Film" v-model="store.searchKey">
     <button @click="search">Search</button>
   </div>
@@ -63,4 +63,27 @@ export default{
   </div>
 </template>
 <style lang="scss" scoped>
+ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+li{
+    list-style: none;
+    margin-bottom: 30px;
+}
+h2{
+    color: red;
+    text-align: center;
+}
+.container{
+    text-align: center;
+}
+input{
+    padding: 5px 30px;
+    margin-right: 30px;
+}
+button{
+    padding: 5px 20px;
+}
 </style>

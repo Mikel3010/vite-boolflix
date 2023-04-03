@@ -9,4 +9,11 @@ export default{
     </header>
 </template>
 <style lang="scss" scoped>
+header{
+    text-align: center;
+}
+h1{
+    color: red;
+    font-size: 50px;
+}
 </style>
